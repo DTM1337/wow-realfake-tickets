@@ -481,6 +481,13 @@ a {
   color: #ff8f8f;
 }
 @media (max-width: 767px) {
+  .scamForm__titleImg {
+    width: 65% !important;
+    margin-left: 27%;
+    margin-top: -12%;
+  }
+}
+@media (max-width: 767px) {
   .uploadModal {
     padding: 1rem;
   }
