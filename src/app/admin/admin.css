@@ -32,8 +32,8 @@
 .admin__head button {
   background: #ffb4dd;
   color: #0a0a0a;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  text-transform: lowercase;
   cursor: pointer;
 }
 .admin__head h1 {
