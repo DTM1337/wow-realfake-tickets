@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase";
+import AdminClient from "./AdminClient";
 import "./admin.css";
 
 export const dynamic = "force-dynamic";
@@ -107,47 +108,9 @@ export default async function AdminPage() {
       </header>
 
       {error && <p className="admin__warn">Fel: {error.message}</p>}
+      {items.length === 0 && !error && <p>no submissions yet.</p>}
 
-      {items.length === 0 && !error && <p>Inga ansökningar än.</p>}
-
-      <div className="admin__grid">
-        {items.map((r) => (
-          <article key={r.id} className="admin__card">
-            {r.imageUrls.length > 0 ? (
-              <div className="admin__images">
-                {r.imageUrls.map((url: string) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={url} alt="Bilaga" key={url} />
-                ))}
-              </div>
-            ) : (
-              <div className="admin__noimg">Inga bilagor</div>
-            )}
-            <div className="admin__meta">
-              <time>{new Date(r.created_at).toLocaleString("sv-SE")}</time>
-              <p>
-                <strong>Name:</strong> {r.name || "—"}
-              </p>
-              <p>
-                <strong>City:</strong> {r.city || "—"}
-              </p>
-              <p>
-                <strong>Country:</strong> {r.country || "—"}
-              </p>
-              <p>
-                <strong>Email:</strong> {r.email || "—"}
-              </p>
-              <p>
-                <strong>Artist:</strong> {r.artist || "—"}
-              </p>
-              <p className="admin__story">{r.story}</p>
-              <span className={"admin__status admin__status--" + r.status}>
-                {r.status}
-              </span>
-            </div>
-          </article>
-        ))}
-      </div>
+      <AdminClient items={items} />
     </main>
   );
 }

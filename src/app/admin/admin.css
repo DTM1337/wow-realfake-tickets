@@ -99,21 +99,174 @@
   white-space: pre-wrap;
   margin-top: 0.3rem;
 }
-.admin__status {
+/* ===== Controls bar ===== */
+.admin__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.admin__viewToggle {
+  display: flex;
+  border: 1px solid #ffb4dd;
+}
+.admin__viewToggle button {
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  color: #ffb4dd;
+  border: 0;
+  cursor: pointer;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.85rem;
+  text-transform: lowercase;
+}
+.admin__viewToggle button.active {
+  background: #ffb4dd;
+  color: #0a0a0a;
+}
+.admin__exportBtn {
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  color: #ffb4dd;
+  border: 1px solid #ffb4dd;
+  cursor: pointer;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.85rem;
+  text-transform: lowercase;
+}
+.admin__exportBtn:hover {
+  background: #ffb4dd;
+  color: #0a0a0a;
+}
+
+/* ===== List view ===== */
+.admin__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.admin__list .admin__card {
+  flex-direction: row;
+}
+.admin__list .admin__images {
+  width: 120px;
+  flex-shrink: 0;
+}
+.admin__list .admin__card img {
+  height: 100px;
+}
+.admin__list .admin__noimg {
+  width: 120px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+/* ===== Images clickable ===== */
+.admin__images {
+  cursor: pointer;
+}
+.admin__images:hover {
+  opacity: 0.85;
+}
+
+/* ===== Delete button ===== */
+.admin__btnDelete {
   align-self: flex-start;
-  margin-top: 0.4rem;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid currentColor;
-}
-.admin__status--pending {
-  color: #ffd98f;
-}
-.admin__status--approved {
-  color: #8effa6;
-}
-.admin__status--rejected {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  background: transparent;
   color: #ff8f8f;
+  border: 1px solid #ff8f8f;
+  cursor: pointer;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  text-transform: lowercase;
+}
+.admin__btnDelete:hover {
+  background: #ff8f8f;
+  color: #0a0a0a;
+}
+.admin__confirm {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+.admin__confirm span {
+  font-size: 0.8rem;
+  color: #ff8f8f;
+}
+.admin__btnDanger,
+.admin__confirm button {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid currentColor;
+  cursor: pointer;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.8rem;
+  text-transform: lowercase;
+  background: transparent;
+}
+.admin__btnDanger {
+  color: #ff8f8f;
+}
+.admin__btnDanger:hover {
+  background: #ff8f8f;
+  color: #0a0a0a;
+}
+.admin__confirm button:last-child {
+  color: #ffb4dd;
+}
+
+/* ===== Lightbox ===== */
+.admin__lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+.admin__lightboxInner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default;
+}
+.admin__lightboxInner img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  display: block;
+}
+.admin__lightboxClose {
+  position: absolute;
+  top: -1.5rem;
+  right: 0;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.admin__lightboxNav {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.admin__lightboxNav button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #ffb4dd;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.admin__lightboxNav button.active {
+  background: #ffb4dd;
 }
