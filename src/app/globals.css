@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Ano Black Wide Italic";
+  src: url("/fonts/AnoBlack-WideItalic.woff2") format("woff2"),
+    url("/fonts/AnoBlack-WideItalic.woff") format("woff");
+  font-display: swap;
+}
+
 /* ===== Reset ===== */
 *,
 *::before,
@@ -103,6 +110,85 @@ a {
 .hero {
   position: relative;
 }
+.section {
+  position: relative;
+}
+.sectionTitle {
+  display: none;
+}
+@media (max-width: 767px) {
+  .sectionTitle {
+    position: absolute;
+    top: 32%;
+    left: 49%;
+    z-index: 1;
+    display: block;
+    width: 87%;
+    aspect-ratio: 1203 / 341;
+    pointer-events: none;
+    transform: translateX(-50%);
+    animation: section-title-twitch 1.7s steps(1, end) infinite;
+  }
+}
+@media (min-width: 768px) {
+  .sectionTitle {
+    position: absolute;
+    top: 2%;
+    left: 57%;
+    z-index: 1;
+    display: block;
+    width: min(69.6%, 1203px);
+    aspect-ratio: 1203 / 341;
+    pointer-events: none;
+    transform: translateX(-50%);
+    animation: section-title-twitch 1.7s steps(1, end) infinite;
+  }
+}
+.sectionTitle__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  opacity: 0;
+}
+.sectionTitle__frame--1 {
+  animation: section-title-frame-1 1.7s steps(1, end) infinite;
+}
+.sectionTitle__frame--2 {
+  animation: section-title-frame-2 1.7s steps(1, end) infinite;
+}
+.sectionTitle__frame--3 {
+  animation: section-title-frame-3 1.7s steps(1, end) infinite;
+}
+@keyframes section-title-frame-1 {
+  0%, 37%, 76%, 100% { opacity: 1; }
+  38%, 75% { opacity: 0; }
+}
+@keyframes section-title-frame-2 {
+  0%, 37%, 64%, 100% { opacity: 0; }
+  38%, 63% { opacity: 1; }
+}
+@keyframes section-title-frame-3 {
+  0%, 63%, 76%, 100% { opacity: 0; }
+  64%, 75% { opacity: 1; }
+}
+@keyframes section-title-twitch {
+  0%, 37%, 76%, 100% { transform: translateX(-50%) translate(0, 0) rotate(0deg); }
+  38%, 51% { transform: translateX(-50%) translate(-2px, 1px) rotate(-0.12deg); }
+  52%, 63% { transform: translateX(-50%) translate(2px, -1px) rotate(0.1deg); }
+  64%, 75% { transform: translateX(-50%) translate(-1px, -2px) rotate(0.06deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sectionTitle,
+  .sectionTitle__frame {
+    animation: none;
+  }
+  .sectionTitle__frame--1 {
+    opacity: 1;
+  }
+}
 .hero__play {
   position: absolute;
   top: 46%;
@@ -178,8 +264,8 @@ a {
   max-height: 100%;
   margin: 0;
   border: 0;
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.8);
+  padding: clamp(1rem, 4vw, 3.5rem);
+  background: rgba(10, 10, 10, 0.88);
 }
 .uploadModal[open] {
   display: grid;
@@ -187,28 +273,35 @@ a {
 }
 .uploadModal__inner {
   position: relative;
-  width: 100%;
-  max-width: 560px;
-  max-height: calc(100vh - 3rem);
-  overflow-y: auto;
-  border-radius: 18px;
+  width: min(100%, 640px);
+  max-height: calc(100vh - clamp(2rem, 8vw, 7rem));
+  overflow: visible;
+}
+.uploadModal__logo {
+  position: absolute;
+  top: clamp(-42px, -4.2vw, -24px);
+  left: clamp(-30px, -4vw, -12px);
+  z-index: 2;
+  width: 26% !important;
+  height: auto;
+  pointer-events: none;
 }
 .uploadModal__close {
   position: absolute;
-  top: 0.5rem;
-  right: 0.6rem;
-  z-index: 1;
-  width: 2rem;
-  height: 2rem;
+  top: clamp(1rem, 2.4vw, 1.9rem);
+  right: clamp(1rem, 2.4vw, 1.7rem);
+  z-index: 3;
+  width: clamp(2.1rem, 4vw, 3.1rem);
+  height: clamp(2.1rem, 4vw, 3.1rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
-  line-height: 1;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  line-height: 0.75;
   color: #ffb4dd;
-  background: rgba(255, 180, 221, 0.1);
+  background: transparent;
   border: 0;
-  border-radius: 999px;
   cursor: pointer;
 }
 .uploadModal__close:hover {
@@ -218,54 +311,96 @@ a {
 /* ===== Formulär (delas av upload-modalen) ===== */
 .scamForm {
   width: 100%;
-  max-width: 560px;
+  max-height: calc(100vh - clamp(2rem, 8vw, 7rem));
+  overflow-y: auto;
   color: #ffb4dd;
-  background: rgba(10, 10, 10, 0.95);
-  border: 2px solid #ffb4dd;
-  border-radius: 18px;
-  padding: 1.75rem;
+  background-color: #111;
+  background-image: linear-gradient(rgba(10, 10, 10, 0.2), rgba(10, 10, 10, 0.2)), url("/images/modal-texture.png");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 180, 221, 0.7);
+  border-radius: 0;
+  padding: clamp(3.5rem, 5vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem);
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: clamp(1rem, 2.1vw, 1.55rem);
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  text-transform: lowercase;
 }
 .scamForm__title {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  padding-right: 1.75rem;
-  margin-bottom: 0.25rem;
+  max-width: 660px;
+  margin: 0 auto clamp(0.45rem, 1.5vw, 1.2rem);
+  padding: 0;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 0.78;
+  text-align: center;
+  white-space: pre-line;
+}
+.scamForm__titleImg {
+  width: 70% !important;
+  margin-left: 23%;
+  margin-top: -4%;
 }
 .scamForm__field {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
 }
 .scamForm__row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
+  gap: clamp(1rem, 4vw, 3rem);
 }
 .scamForm__field > span {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: clamp(0.85rem, 1.4vw, 1.3rem);
+  line-height: 0.95;
+  letter-spacing: 0;
 }
 .scamForm__field input,
 .scamForm__field textarea {
-  font: inherit;
-  color: #0a0a0a;
-  background: #ffb4dd;
-  border: 0;
-  border-radius: 10px;
+  min-height: clamp(2.4rem, 4.56vw, 3.56rem);
+  font: 1.2rem "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  color: #ffb4dd;
+  background: transparent;
+  border: 1px solid #ffb4dd;
+  border-radius: 0;
   padding: 0.55rem 0.7rem;
   resize: vertical;
 }
-.scamForm__field input[type="file"] {
-  background: transparent;
-  color: #ffb4dd;
-  border-radius: 0;
-  padding: 0.3rem 0;
-  font-size: 0.8rem;
+.scamForm__field textarea {
+  min-height: clamp(4.4rem, 7vw, 5.6rem);
+}
+.scamForm__field input:focus,
+.scamForm__field textarea:focus {
+  outline: 2px solid #ffb4dd;
+  outline-offset: 3px;
+}
+.scamForm__field--attachments {
+  align-items: flex-start;
+}
+.scamForm__fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.scamForm__fileButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(2.8rem, 4.8vw, 3.52rem);
+  margin-top: 0.4rem;
+  padding: 0.7rem clamp(1.4rem, 3vw, 2rem);
+  color: #0a0a0a;
+  background: #ffb4dd;
+  cursor: pointer;
+  font-size: clamp(1.4rem, 2.7vw, 2.4rem);
+  line-height: 0.95;
+}
+.scamForm__field--attachments:hover .scamForm__fileButton {
+  background: #ffc7e7;
 }
 .scamForm__previews {
   display: grid;
@@ -273,11 +408,32 @@ a {
   gap: 0.65rem;
 }
 .scamForm__preview {
+  position: relative;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 180, 221, 0.6);
-  border-radius: 12px;
+  border: 1px solid rgba(255, 180, 221, 0.75);
+  border-radius: 0;
   background: rgba(255, 180, 221, 0.08);
+}
+.scamForm__previewRemove {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  color: #fff;
+  background: rgba(10, 10, 10, 0.75);
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+.scamForm__previewRemove:hover {
+  background: #000;
 }
 .scamForm__preview img {
   width: 100%;
@@ -288,36 +444,35 @@ a {
   overflow: hidden;
   padding: 0.35rem;
   color: #ffb4dd;
-  font-size: 0.68rem;
+  font: 0.75rem "Helvetica Neue", Arial, sans-serif;
   line-height: 1.2;
   text-overflow: ellipsis;
+  text-transform: none;
   white-space: nowrap;
 }
-.scamForm__terms {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-}
 .scamForm__submit {
-  margin-top: 0.4rem;
-  font: inherit;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  min-height: clamp(3.9rem, 6vw, 4.8rem);
+  margin-top: clamp(0.4rem, 1vw, 0.8rem);
+  font: clamp(1.55rem, 2.8vw, 2.4rem) "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  line-height: 0.95;
+  text-transform: lowercase;
   color: #0a0a0a;
   background: #ffb4dd;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   padding: 0.7rem;
   cursor: pointer;
+}
+.scamForm__submit:hover {
+  background: #ffc7e7;
 }
 .scamForm__submit:disabled {
   opacity: 0.6;
   cursor: default;
 }
 .scamForm__msg {
-  font-size: 0.85rem;
+  font: 0.95rem "Helvetica Neue", Arial, sans-serif;
+  text-transform: none;
 }
 .scamForm__msg--success {
   color: #8effa6;
@@ -325,8 +480,28 @@ a {
 .scamForm__msg--error {
   color: #ff8f8f;
 }
-@media (max-width: 520px) {
+@media (max-width: 767px) {
+  .uploadModal {
+    padding: 1rem;
+  }
+  .uploadModal__inner,
+  .scamForm {
+    max-height: calc(100vh - 2rem);
+  }
+  .uploadModal__logo {
+    width: 126px;
+    top: -24px;
+    left: -12px;
+  }
+  .scamForm {
+    padding: 4.75rem 1.25rem 1.75rem;
+    gap: 0.95rem;
+  }
+  .scamForm__title {
+    font-size: clamp(2.4rem, 13vw, 4.2rem);
+  }
   .scamForm__row {
     grid-template-columns: 1fr;
+    gap: 0.95rem;
   }
 }

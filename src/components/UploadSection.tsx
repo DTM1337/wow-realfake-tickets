@@ -10,7 +10,8 @@ type AttachmentPreview = {
 };
 
 /**
- * "Upload your scam proof".
+ * "Upload your
+scam proof".
  * Sektionsbilden visas som vanligt. En osynlig hotspot ligger ovanpå
  * upload-ikonen i bilden — klick öppnar formuläret som en modal (<dialog>).
  *
@@ -118,6 +119,12 @@ export default function UploadSection() {
         aria-labelledby="uploadModalTitle"
       >
         <div className="uploadModal__inner">
+          <img
+            className="uploadModal__logo"
+            src="/images/modal-logo.png"
+            alt=""
+            aria-hidden="true"
+          />
           <button
             type="button"
             className="uploadModal__close"
@@ -128,10 +135,7 @@ export default function UploadSection() {
           </button>
 
           <form className="scamForm" onSubmit={handleSubmit}>
-            <h2 className="scamForm__title" id="uploadModalTitle">
-              Upload your scam proof
-            </h2>
-
+            <img src="/images/upload-title.png" alt="Upload your scam proof" className="scamForm__titleImg" />
             <label className="scamForm__field">
               <span>Name</span>
               <input name="name" type="text" autoComplete="name" required />
@@ -161,24 +165,36 @@ export default function UploadSection() {
 
             <label className="scamForm__field">
               <span>Your story</span>
-              <textarea name="story" required rows={4} />
+              <textarea name="story" required rows={2} />
             </label>
 
             <label className="scamForm__field scamForm__field--attachments">
               <span>Attachments</span>
               <input
+                id="attachments"
+                className="scamForm__fileInput"
                 name="attachments"
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={handleAttachmentsChange}
               />
+              <span className="scamForm__fileButton">Choose files</span>
             </label>
 
             {attachmentPreviews.length > 0 && (
               <div className="scamForm__previews" aria-label="Selected images">
                 {attachmentPreviews.map((preview) => (
                   <figure className="scamForm__preview" key={preview.id}>
+                    <button
+                      type="button"
+                      className="scamForm__previewRemove"
+                      onClick={() => {
+                        URL.revokeObjectURL(preview.url);
+                        setAttachmentPreviews((prev) => prev.filter((p) => p.id !== preview.id));
+                      }}
+                      aria-label={`Ta bort ${preview.name}`}
+                    >×</button>
                     <img src={preview.url} alt="" />
                     <figcaption>{preview.name}</figcaption>
                   </figure>
