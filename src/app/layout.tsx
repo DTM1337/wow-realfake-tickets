@@ -4,12 +4,13 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Real Fake Tickets — Way Out West",
   description:
-    "Blev du scammad på festivalbiljetter? Way Out West ger lurade fans en ny chans. Ladda upp din scam-story och din fejkbiljett — den kan bli en riktig entré.",
+    "Scamming fans has become an industry and fake tickets are at an all time high, leaving fans broke and devastated outside arenas around the globe. tour moves on, fans miss out. Luckily, many tours make a stop at Way Out West? That's why this year, we're giving devastated fans a new chance. Your fake ticket can now become a real entry to Way Out West. Apply with your scam-story to get the opportunity to experience your favorite artist live, once and for all.",
   openGraph: {
     title: "Real Fake Tickets — Way Out West",
     description:
-      "Din fejkbiljett kan bli en riktig entré till Way Out West. Ladda upp din scam-story.",
+      "Scamming fans has become an industry and fake tickets are at an all time high, leaving fans broke and devastated outside arenas around the globe. Your fake ticket can now become a real entry to Way Out West.",
     type: "website",
+    images: ["/images/WristBand04.jpg"],
   },
 };
 
