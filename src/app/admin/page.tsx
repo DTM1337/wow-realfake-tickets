@@ -112,7 +112,7 @@ export default async function AdminPage() {
 
       <AdminClient
         items={items}
-        analyticsUrl="https://vercel.com/dashboard/analytics"
+        analyticsUrl="https://vercel.com/dtm1337s-projects/wow-realfake-tickets/analytics"
       />
     </main>
   );
