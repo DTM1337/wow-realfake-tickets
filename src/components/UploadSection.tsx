@@ -88,7 +88,7 @@ export default function UploadSection() {
       }
 
       setStatus("success");
-      setMessage("Tack! Din ansökan är inskickad.");
+      setMessage("thank you! your scam proof was submitted!");
       formEl.reset();
       clearAttachmentPreviews();
     } catch {

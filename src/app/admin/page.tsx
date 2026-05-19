@@ -100,7 +100,7 @@ export default async function AdminPage() {
   return (
     <main className="admin">
       <header className="admin__head">
-        <h1>Scam-ansökningar ({items.length})</h1>
+        <h1>submitted scam proofs ({items.length})</h1>
         <form action={logout}>
           <button type="submit">Logga ut</button>
         </form>

@@ -36,6 +36,10 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+.admin__head h1 {
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  text-transform: lowercase;
+}
 .admin__head {
   display: flex;
   justify-content: space-between;
