@@ -99,6 +99,50 @@
   white-space: pre-wrap;
   margin-top: 0.3rem;
 }
+/* ===== Tabs ===== */
+.admin__tabs {
+  display: flex;
+  border-bottom: 1px solid #ffb4dd;
+  margin-bottom: 1.5rem;
+  gap: 0;
+}
+.admin__tabs button {
+  padding: 0.5rem 1.4rem;
+  background: transparent;
+  color: #ffb4dd;
+  border: 0;
+  cursor: pointer;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  text-transform: lowercase;
+  opacity: 0.5;
+}
+.admin__tabs button.active {
+  opacity: 1;
+  border-bottom: 2px solid #ffb4dd;
+  margin-bottom: -1px;
+}
+.admin__analyticsPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+.admin__analyticsLink {
+  padding: 0.5rem 1.2rem;
+  border: 1px solid #ffb4dd;
+  color: #ffb4dd;
+  text-decoration: none;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  text-transform: lowercase;
+}
+.admin__analyticsLink:hover {
+  background: #ffb4dd;
+  color: #0a0a0a;
+}
+
 /* ===== Controls bar ===== */
 .admin__controls {
   display: flex;

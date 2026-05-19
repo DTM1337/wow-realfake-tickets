@@ -15,7 +15,8 @@ type Item = {
   imageUrls: string[];
 };
 
-export default function AdminClient({ items: initial }: { items: Item[] }) {
+export default function AdminClient({ items: initial, analyticsUrl }: { items: Item[]; analyticsUrl: string }) {
+  const [tab, setTab] = useState<"submissions" | "analytics">("submissions");
   const [items, setItems] = useState(initial);
   const [view, setView] = useState<"grid" | "list">("grid");
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
@@ -51,72 +52,75 @@ export default function AdminClient({ items: initial }: { items: Item[] }) {
 
   return (
     <>
-      <div className="admin__controls">
-        <div className="admin__viewToggle">
-          <button
-            onClick={() => setView("grid")}
-            className={view === "grid" ? "active" : ""}
-          >
-            grid
-          </button>
-          <button
-            onClick={() => setView("list")}
-            className={view === "list" ? "active" : ""}
-          >
-            list
-          </button>
-        </div>
-        <button className="admin__exportBtn" onClick={exportCSV}>
-          export csv
+      <div className="admin__tabs">
+        <button
+          className={tab === "submissions" ? "active" : ""}
+          onClick={() => setTab("submissions")}
+        >
+          submissions
+        </button>
+        <button
+          className={tab === "analytics" ? "active" : ""}
+          onClick={() => setTab("analytics")}
+        >
+          analytics
         </button>
       </div>
 
-      <div className={view === "grid" ? "admin__grid" : "admin__list"}>
-        {items.map((item) => (
-          <article key={item.id} className="admin__card">
-            {item.imageUrls.length > 0 ? (
-              <div
-                className="admin__images"
-                onClick={() => setLightbox({ urls: item.imageUrls, index: 0 })}
-              >
-                {item.imageUrls.map((url) => (
-                  <img src={url} alt="Bilaga" key={url} />
-                ))}
-              </div>
-            ) : (
-              <div className="admin__noimg">no attachments</div>
-            )}
-            <div className="admin__meta">
-              <time>{new Date(item.created_at).toLocaleString("sv-SE")}</time>
-              <p><strong>Name:</strong> {item.name || "—"}</p>
-              <p><strong>City:</strong> {item.city || "—"}</p>
-              <p><strong>Country:</strong> {item.country || "—"}</p>
-              <p><strong>Email:</strong> {item.email || "—"}</p>
-              <p><strong>Artist:</strong> {item.artist || "—"}</p>
-              <p className="admin__story">{item.story}</p>
-              {confirmDelete === item.id ? (
-                <div className="admin__confirm">
-                  <span>are you sure?</span>
-                  <button
-                    className="admin__btnDanger"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    yes, delete
-                  </button>
-                  <button onClick={() => setConfirmDelete(null)}>cancel</button>
-                </div>
-              ) : (
-                <button
-                  className="admin__btnDelete"
-                  onClick={() => setConfirmDelete(item.id)}
-                >
-                  delete
-                </button>
-              )}
+      {tab === "analytics" && (
+        <div className="admin__analyticsPanel">
+          <p>analytics visas i Vercel-dashboarden.</p>
+          <a href={analyticsUrl} target="_blank" rel="noreferrer" className="admin__analyticsLink">
+            öppna vercel analytics →
+          </a>
+        </div>
+      )}
+
+      {tab === "submissions" && (
+        <>
+          <div className="admin__controls">
+            <div className="admin__viewToggle">
+              <button onClick={() => setView("grid")} className={view === "grid" ? "active" : ""}>grid</button>
+              <button onClick={() => setView("list")} className={view === "list" ? "active" : ""}>list</button>
             </div>
-          </article>
-        ))}
-      </div>
+            <button className="admin__exportBtn" onClick={exportCSV}>export csv</button>
+          </div>
+
+          <div className={view === "grid" ? "admin__grid" : "admin__list"}>
+            {items.map((item) => (
+              <article key={item.id} className="admin__card">
+                {item.imageUrls.length > 0 ? (
+                  <div className="admin__images" onClick={() => setLightbox({ urls: item.imageUrls, index: 0 })}>
+                    {item.imageUrls.map((url) => (
+                      <img src={url} alt="Bilaga" key={url} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="admin__noimg">no attachments</div>
+                )}
+                <div className="admin__meta">
+                  <time>{new Date(item.created_at).toLocaleString("sv-SE")}</time>
+                  <p><strong>Name:</strong> {item.name || "—"}</p>
+                  <p><strong>City:</strong> {item.city || "—"}</p>
+                  <p><strong>Country:</strong> {item.country || "—"}</p>
+                  <p><strong>Email:</strong> {item.email || "—"}</p>
+                  <p><strong>Artist:</strong> {item.artist || "—"}</p>
+                  <p className="admin__story">{item.story}</p>
+                  {confirmDelete === item.id ? (
+                    <div className="admin__confirm">
+                      <span>are you sure?</span>
+                      <button className="admin__btnDanger" onClick={() => handleDelete(item.id)}>yes, delete</button>
+                      <button onClick={() => setConfirmDelete(null)}>cancel</button>
+                    </div>
+                  ) : (
+                    <button className="admin__btnDelete" onClick={() => setConfirmDelete(item.id)}>delete</button>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </>
+      )}
 
       {lightbox && (
         <div className="admin__lightbox" onClick={() => setLightbox(null)}>

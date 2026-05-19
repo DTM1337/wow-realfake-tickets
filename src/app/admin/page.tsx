@@ -110,7 +110,10 @@ export default async function AdminPage() {
       {error && <p className="admin__warn">Fel: {error.message}</p>}
       {items.length === 0 && !error && <p>no submissions yet.</p>}
 
-      <AdminClient items={items} />
+      <AdminClient
+        items={items}
+        analyticsUrl="https://vercel.com/dashboard/analytics"
+      />
     </main>
   );
 }
