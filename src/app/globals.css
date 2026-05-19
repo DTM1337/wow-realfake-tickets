@@ -249,10 +249,10 @@ a {
    Platshållare tills upload-mobile.png är uppmätt. */
 @media (max-width: 767px) {
   .upload__trigger {
-    top: 30%;
-    left: 50%;
-    width: 40%;
-    height: 14%;
+    top: 81%;
+    left: 20%;
+    width: 70%;
+    height: 10%;
   }
 }
 
