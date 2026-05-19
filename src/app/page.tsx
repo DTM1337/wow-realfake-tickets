@@ -11,7 +11,7 @@ export default function Home() {
         Designen bakar in all synlig text i sektionsbilderna, så den här
         texten är osynlig på skärm men läses av Google och skärmläsare.
       */}
-      <h1 className="srOnly">Way Out West — Real Fake Tickets</h1>
+      <h1 className="srOnly">WOW REALFAKE TICKETS</h1>
       <p className="srOnly">
         Scamming av festivalbiljetter är ett växande problem. Way Out West ger
         lurade fans en ny chans: din fejkbiljett kan bli en riktig entré. Ladda
