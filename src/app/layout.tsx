@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description:
       "Scamming fans has become an industry and fake tickets are at an all time high, leaving fans broke and devastated outside arenas around the globe. Your fake ticket can now become a real entry to Way Out West.",
     type: "website",
-    images: ["/images/WristBand04.jpg"],
+    images: ["/images/wow-kv.jpg"],
   },
 };
 
