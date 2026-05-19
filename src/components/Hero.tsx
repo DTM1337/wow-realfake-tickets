@@ -47,9 +47,9 @@ export default function Hero() {
                 cx="50"
                 cy="50"
                 r="48"
-                fill="rgba(0,0,0,0.35)"
+                fill="none"
                 stroke="#ffffff"
-                strokeWidth="3"
+                strokeWidth="2"
               />
               <path d="M40 32 L70 50 L40 68 Z" fill="#ffffff" />
             </svg>
