@@ -221,6 +221,54 @@ a {
   border: 0;
 }
 
+/* ===== FAQ ===== */
+.faq {
+  background: #0a0a0a;
+  padding: 0 clamp(1.5rem, 8vw, 10rem) clamp(3rem, 6vw, 6rem);
+  margin-top: -3rem;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  color: #ffb4dd;
+}
+@media (max-width: 767px) {
+  .faq {
+    margin-top: -25px;
+  }
+}
+.faq__title {
+  position: relative;
+  width: 40%;
+  aspect-ratio: 1203 / 341;
+  margin: 0 auto 1rem;
+  animation: section-title-twitch 1.7s steps(1, end) infinite;
+}
+.faq__title .sectionTitle__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+}
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.faq__item {
+  border: 1px solid #ffb4dd;
+  padding: clamp(1.2rem, 3vw, 2rem) clamp(1.2rem, 3vw, 2.5rem);
+}
+.faq__q {
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  margin-bottom: 1rem;
+}
+.faq__a {
+  font-size: clamp(0.75rem, 1.4vw, 1.1rem);
+  line-height: 1.5;
+}
+
 /* ===== Upload-sektion: hotspot ===== */
 .upload {
   position: relative;

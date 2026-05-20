@@ -2,6 +2,7 @@ import Ticker from "@/components/Ticker";
 import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 import UploadSection from "@/components/UploadSection";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -37,6 +38,8 @@ export default function Home() {
         mobile="/images/scam-mobile.png"
         alt="Scam tickets now valid"
       />
+
+      <FAQ />
 
       <Section
         id="footer"
