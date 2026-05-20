@@ -14,10 +14,10 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <img
-        src="/images/WoW-draft-still.jpg"
-        alt="Way Out West — Real Fake Tickets"
-      />
+      <picture>
+        <source media="(max-width: 767px)" srcSet="/images/hero-mobile.png" />
+        <img src="/images/hero-desktop.png" alt="Way Out West — Real Fake Tickets" />
+      </picture>
     </section>
   );
 }
