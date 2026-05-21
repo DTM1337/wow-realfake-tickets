@@ -498,6 +498,42 @@ a {
   text-transform: none;
   white-space: nowrap;
 }
+.scamForm__field--checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+}
+.scamForm__field--checkbox input[type="checkbox"] {
+  min-height: unset;
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  accent-color: #ffb4dd;
+  cursor: pointer;
+}
+.scamForm__field--checkbox a {
+  text-decoration: underline;
+  color: #ffb4dd;
+}
+.scamForm__field--checkbox a:hover {
+  color: #fff;
+}
+.terms {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #ffb4dd;
+  font-family: "Ano Black Wide Italic", "Helvetica Neue", Arial, sans-serif;
+  padding: clamp(3rem, 8vw, 8rem) clamp(1.5rem, 8vw, 10rem);
+}
+.terms h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 2rem;
+  text-transform: lowercase;
+}
+.terms p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
 .scamForm__submit {
   min-height: clamp(3.9rem, 6vw, 4.8rem);
   margin-top: clamp(0.4rem, 1vw, 0.8rem);

@@ -202,6 +202,16 @@ export default function UploadSection() {
               </div>
             )}
 
+            <label className="scamForm__field scamForm__field--checkbox">
+              <input type="checkbox" name="terms" required />
+              <span>
+                i agree to the{" "}
+                <a href="/terms" target="_blank" rel="noreferrer">
+                  terms and conditions
+                </a>
+              </span>
+            </label>
+
             <button
               type="submit"
               className="scamForm__submit"
