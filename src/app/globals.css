@@ -133,7 +133,7 @@ a {
 @media (min-width: 768px) {
   .sectionTitle {
     position: absolute;
-    top: 13%;
+    top: 11%;
     left: 57%;
     z-index: 1;
     display: block;
