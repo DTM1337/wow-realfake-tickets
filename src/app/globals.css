@@ -119,7 +119,7 @@ a {
 @media (max-width: 767px) {
   .sectionTitle {
     position: absolute;
-    top: 32%;
+    top: 42%;
     left: 49%;
     z-index: 1;
     display: block;
@@ -133,7 +133,7 @@ a {
 @media (min-width: 768px) {
   .sectionTitle {
     position: absolute;
-    top: 2%;
+    top: 13%;
     left: 57%;
     z-index: 1;
     display: block;
