@@ -49,7 +49,14 @@ export async function POST(req: Request) {
       );
     }
 
-    const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+    const MIME_TO_EXT: Record<string, string> = {
+      "image/jpeg": "jpg",
+      "image/png": "png",
+      "image/gif": "gif",
+      "image/webp": "webp",
+      "image/heic": "heic",
+    };
+    const ext = MIME_TO_EXT[file.type] ?? "jpg";
     const path = randomUUID() + "." + ext;
 
     const { error: upErr } = await supabase.storage

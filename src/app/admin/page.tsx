@@ -1,12 +1,11 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { createServiceClient } from "@/lib/supabase";
+import { makeSessionToken, isValidToken, COOKIE } from "@/lib/auth";
 import AdminClient from "./AdminClient";
 import "./admin.css";
 
 export const dynamic = "force-dynamic";
-
-const COOKIE = "wow_admin";
 
 /*
  * OBS: detta är ett enkelt scaffold-skydd — ett lösenord i en cookie.
@@ -18,7 +17,7 @@ async function login(formData: FormData) {
   "use server";
   const pw = String(formData.get("password") || "");
   if (pw && pw === process.env.ADMIN_PASSWORD) {
-    (await cookies()).set(COOKIE, pw, {
+    (await cookies()).set(COOKIE, makeSessionToken(pw), {
       httpOnly: true,
       sameSite: "lax",
       path: "/admin",
@@ -34,9 +33,7 @@ async function logout() {
 }
 
 export default async function AdminPage() {
-  const authed =
-    !!process.env.ADMIN_PASSWORD &&
-    (await cookies()).get(COOKIE)?.value === process.env.ADMIN_PASSWORD;
+  const authed = isValidToken((await cookies()).get(COOKIE)?.value ?? "");
 
   if (!authed) {
     return (

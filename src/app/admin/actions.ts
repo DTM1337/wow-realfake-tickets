@@ -1,9 +1,20 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { createServiceClient } from "@/lib/supabase";
+import { isValidToken, COOKIE } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
+async function assertAdmin() {
+  const token = (await cookies()).get(COOKIE)?.value ?? "";
+  if (!isValidToken(token)) {
+    throw new Error("Unauthorized");
+  }
+}
+
 export async function deleteSubmission(id: string) {
+  await assertAdmin();
+
   const supabase = createServiceClient();
   if (!supabase) return;
 
