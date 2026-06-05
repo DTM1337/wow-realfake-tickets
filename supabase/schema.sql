@@ -23,6 +23,7 @@ alter table public.scam_applications add column if not exists name text;
 alter table public.scam_applications add column if not exists city text;
 alter table public.scam_applications add column if not exists country text;
 alter table public.scam_applications add column if not exists attachment_paths text[] not null default '{}';
+alter table public.scam_applications add column if not exists age integer;
 
 -- 2. RLS pa — men inga policies.
 -- Ingen anon-atkomst alls. API-routen (/api/submit) och adminvyn anvander

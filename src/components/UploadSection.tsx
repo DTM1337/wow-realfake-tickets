@@ -154,6 +154,11 @@ export default function UploadSection() {
             </div>
 
             <label className="scamForm__field">
+              <span>Age</span>
+              <input name="age" type="number" min="1" max="120" required />
+            </label>
+
+            <label className="scamForm__field">
               <span>Email</span>
               <input name="email" type="email" autoComplete="email" required />
             </label>

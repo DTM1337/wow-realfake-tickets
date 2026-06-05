@@ -29,11 +29,12 @@ export async function POST(req: Request) {
   const email = String(form.get("email") || "").trim();
   const artist = String(form.get("artist") || "").trim();
   const story = String(form.get("story") || "").trim();
+  const age = parseInt(String(form.get("age") || ""), 10);
   const attachments = form
     .getAll("attachments")
     .filter((item): item is File => item instanceof File && item.size > 0);
 
-  if (!name || !city || !country || !email || !artist || !story) {
+  if (!name || !city || !country || !email || !artist || !story || isNaN(age)) {
     return NextResponse.json(
       { error: "Fyll i alla obligatoriska fält." },
       { status: 400 }
@@ -81,6 +82,7 @@ export async function POST(req: Request) {
       email,
       artist,
       story,
+      age,
       attachment_paths: attachmentPaths,
       ticket_image_path: attachmentPaths[0] || null,
       terms_accepted: true,
