@@ -15,6 +15,7 @@ const baseConfig = {
         source: "/",
         destination: "/realfaketickets",
         permanent: false,
+        basePath: false,
       },
     ];
   },
