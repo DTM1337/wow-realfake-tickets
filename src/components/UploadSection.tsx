@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 
 type Status = "idle" | "submitting" | "success" | "error";
 type AttachmentPreview = {
@@ -22,7 +21,6 @@ scam proof".
  * Avkommentera dev-outlinen i samma regel för att se rutan medan du placerar.
  */
 export default function UploadSection() {
-  const { basePath } = useRouter();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -77,7 +75,7 @@ export default function UploadSection() {
     setMessage("");
 
     try {
-      const res = await fetch(`${basePath}/api/submit`, {
+      const res = await fetch(`${process.env.__NEXT_ROUTER_BASEPATH ?? ""}/api/submit`, {
         method: "POST",
         body: new FormData(formEl),
       });
