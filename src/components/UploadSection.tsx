@@ -75,7 +75,7 @@ export default function UploadSection() {
     setMessage("");
 
     try {
-      const res = await fetch("/api/submit", {
+      const res = await fetch("api/submit", {
         method: "POST",
         body: new FormData(formEl),
       });

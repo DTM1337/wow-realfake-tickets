@@ -2,6 +2,7 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
+  basePath: "/realfaketickets",
   outputFileTracingRoot: import.meta.dirname,
   webpack(config, { dev }) {
     if (dev) {
