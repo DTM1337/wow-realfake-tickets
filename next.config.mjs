@@ -4,6 +4,15 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 const baseConfig = {
   basePath: "/realfaketickets",
   outputFileTracingRoot: import.meta.dirname,
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/realfaketickets",
+        permanent: false,
+      },
+    ];
+  },
   webpack(config, { dev }) {
     if (dev) {
       config.cache = false;
