@@ -1,3 +1,5 @@
+import { asset } from "@/lib/asset";
+
 type Props = {
   id?: string;
   desktop: string;
@@ -21,9 +23,9 @@ export default function Section({ id, desktop, mobile, alt }: Props) {
       </picture>
       {showAnimatedTitle && (
         <div className="sectionTitle" aria-hidden="true">
-          <img className="sectionTitle__frame sectionTitle__frame--1" src="/images/hero-title-1.png" alt="" />
-          <img className="sectionTitle__frame sectionTitle__frame--2" src="/images/hero-title-2.png" alt="" />
-          <img className="sectionTitle__frame sectionTitle__frame--3" src="/images/hero-title-3.png" alt="" />
+          <img className="sectionTitle__frame sectionTitle__frame--1" src={asset("/images/hero-title-1.png")} alt="" />
+          <img className="sectionTitle__frame sectionTitle__frame--2" src={asset("/images/hero-title-2.png")} alt="" />
+          <img className="sectionTitle__frame sectionTitle__frame--3" src={asset("/images/hero-title-3.png")} alt="" />
         </div>
       )}
     </section>

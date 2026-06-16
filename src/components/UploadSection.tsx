@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 
 type Status = "idle" | "submitting" | "success" | "error";
 type AttachmentPreview = {
@@ -100,8 +101,8 @@ export default function UploadSection() {
   return (
     <section id="upload" className="upload">
       <picture>
-        <source media="(max-width: 767px)" srcSet="/images/upload-mobile.png" />
-        <img src="/images/upload-desktop.png" alt="Upload your scam proof" />
+        <source media="(max-width: 767px)" srcSet={asset("/images/upload-mobile.png")} />
+        <img src={asset("/images/upload-desktop.png")} alt="Upload your scam proof" />
       </picture>
 
       {/* Osynlig klickyta ovanpå upload-ikonen i bilden */}
@@ -121,7 +122,7 @@ export default function UploadSection() {
         <div className="uploadModal__inner">
           <img
             className="uploadModal__logo"
-            src="/images/modal-logo.png"
+            src={asset("/images/modal-logo.png")}
             alt=""
             aria-hidden="true"
           />
@@ -135,7 +136,7 @@ export default function UploadSection() {
           </button>
 
           <form className="scamForm" onSubmit={handleSubmit}>
-            <img src="/images/upload-title.png" alt="Upload your scam proof" className="scamForm__titleImg" />
+            <img src={asset("/images/upload-title.png")} alt="Upload your scam proof" className="scamForm__titleImg" />
             <label className="scamForm__field">
               <span>Name</span>
               <input name="name" type="text" autoComplete="name" required />

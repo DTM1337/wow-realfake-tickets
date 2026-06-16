@@ -1,3 +1,5 @@
+import { asset } from "@/lib/asset";
+
 const faqs = [
   {
     q: "How does it work?",
@@ -13,9 +15,9 @@ export default function FAQ() {
   return (
     <section className="faq">
       <div className="faq__title" aria-label="Frequently Asked Questions">
-        <img className="sectionTitle__frame sectionTitle__frame--1" src="/images/faq-title-1.png" alt="" />
-        <img className="sectionTitle__frame sectionTitle__frame--2" src="/images/faq-title-2.png" alt="" />
-        <img className="sectionTitle__frame sectionTitle__frame--3" src="/images/faq-title-3.png" alt="" />
+        <img className="sectionTitle__frame sectionTitle__frame--1" src={asset("/images/faq-title-1.png")} alt="" />
+        <img className="sectionTitle__frame sectionTitle__frame--2" src={asset("/images/faq-title-2.png")} alt="" />
+        <img className="sectionTitle__frame sectionTitle__frame--3" src={asset("/images/faq-title-3.png")} alt="" />
       </div>
       <div className="faq__list">
         {faqs.map((item, i) => (

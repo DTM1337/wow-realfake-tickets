@@ -5,6 +5,8 @@
  * Två identiska grupper i spåret; animationen flyttar -50% (exakt en
  * gruppbredd) vilket ger en sömlös loop oavsett bildbredd.
  */
+import { asset } from "@/lib/asset";
+
 export default function Ticker() {
   const COPIES = 3; // höj om du har skärmar bredare än ~5700px
 
@@ -20,7 +22,7 @@ export default function Ticker() {
             {Array.from({ length: COPIES }).map((_, i) => (
               <img
                 key={i}
-                src="/images/ticker-strip.png"
+                src={asset("/images/ticker-strip.png")}
                 alt=""
                 className="ticker__img"
                 draggable={false}

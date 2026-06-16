@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "WOW REALFAKE TICKETS",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     description:
       "Scamming fans has become an industry and fake tickets are at an all time high, leaving fans broke and devastated outside arenas around the globe. Your fake ticket can now become a real entry to Way Out West.",
     type: "website",
-    images: ["/images/wow-kv.jpg"],
+    images: [asset("/images/wow-kv.jpg")],
   },
 };
 
@@ -21,7 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="sv">
+    <html lang="sv" style={{
+      "--modal-texture-url": `url("${asset("/images/modal-texture.png")}")`,
+    } as React.CSSProperties}>
       <body>
         {children}
         <Analytics />

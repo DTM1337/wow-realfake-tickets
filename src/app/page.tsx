@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Section from "@/components/Section";
 import UploadSection from "@/components/UploadSection";
 import FAQ from "@/components/FAQ";
+import { asset } from "@/lib/asset";
 
 export default function Home() {
   return (
@@ -25,8 +26,8 @@ export default function Home() {
 
       <Section
         id="real-fake-tickets"
-        desktop="/images/realfake-desktop.png"
-        mobile="/images/realfake-mobile.png"
+        desktop={asset("/images/realfake-desktop.png")}
+        mobile={asset("/images/realfake-mobile.png")}
         alt="WOW Admit One — Real Fake Tickets"
       />
 
@@ -34,8 +35,8 @@ export default function Home() {
 
       <Section
         id="scam-tickets"
-        desktop="/images/scam-desktop.png"
-        mobile="/images/scam-mobile.png"
+        desktop={asset("/images/scam-desktop.png")}
+        mobile={asset("/images/scam-mobile.png")}
         alt="Scam tickets now valid"
       />
 
@@ -43,8 +44,8 @@ export default function Home() {
 
       <Section
         id="footer"
-        desktop="/images/footer-desktop.png"
-        mobile="/images/footer-mobile.png"
+        desktop={asset("/images/footer-desktop.png")}
+        mobile={asset("/images/footer-mobile.png")}
         alt="Way Out West — all rights reserved"
       />
     </main>

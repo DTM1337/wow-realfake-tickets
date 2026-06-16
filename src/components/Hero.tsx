@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { asset } from "@/lib/asset";
 
 /** YouTube-id för hero-videon. Byt mot festival-videons id (delen efter v= i URL:en). */
 const YOUTUBE_ID = "dQw4w9WgXcQ";
@@ -15,8 +16,8 @@ export default function Hero() {
   return (
     <section className="hero">
       <picture>
-        <source media="(max-width: 767px)" srcSet="/images/hero-mobile.png" />
-        <img src="/images/hero-desktop.png" alt="Way Out West — Real Fake Tickets" />
+        <source media="(max-width: 767px)" srcSet={asset("/images/hero-mobile.png")} />
+        <img src={asset("/images/hero-desktop.png")} alt="Way Out West — Real Fake Tickets" />
       </picture>
     </section>
   );

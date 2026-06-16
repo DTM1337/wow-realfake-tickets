@@ -1,8 +1,13 @@
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants.js";
 
 /** @type {import('next').NextConfig} */
+const BASE_PATH = "/realfaketickets";
+
 const baseConfig = {
-  basePath: "/realfaketickets",
+  basePath: BASE_PATH,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: BASE_PATH,
+  },
   outputFileTracingRoot: import.meta.dirname,
   async redirects() {
     return [

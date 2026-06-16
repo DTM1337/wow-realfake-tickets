@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Ano Black Wide Italic";
-  src: url("/fonts/AnoBlack-WideItalic.woff2") format("woff2"),
-    url("/fonts/AnoBlack-WideItalic.woff") format("woff");
+  src: url("/realfaketickets/fonts/AnoBlack-WideItalic.woff2") format("woff2"),
+    url("/realfaketickets/fonts/AnoBlack-WideItalic.woff") format("woff");
   font-display: swap;
 }
 
@@ -363,7 +363,7 @@ a {
   overflow-y: auto;
   color: #ffb4dd;
   background-color: #111;
-  background-image: linear-gradient(rgba(10, 10, 10, 0.2), rgba(10, 10, 10, 0.2)), url("/images/modal-texture.png");
+  background-image: linear-gradient(rgba(10, 10, 10, 0.2), rgba(10, 10, 10, 0.2)), var(--modal-texture-url);
   background-size: cover;
   background-position: center;
   border: 1px solid rgba(255, 180, 221, 0.7);
