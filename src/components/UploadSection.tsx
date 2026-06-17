@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { asset } from "@/lib/asset";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -212,9 +213,9 @@ export default function UploadSection() {
               <input type="checkbox" name="terms" required />
               <span>
                 i agree to the{" "}
-                <a href="/terms" target="_blank" rel="noreferrer">
+                <Link href="/terms" target="_blank" rel="noreferrer">
                   terms and conditions
-                </a>
+                </Link>
               </span>
             </label>
 
