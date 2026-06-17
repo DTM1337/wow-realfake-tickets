@@ -527,12 +527,33 @@ a {
 }
 .terms h1 {
   font-size: clamp(2rem, 5vw, 4rem);
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   text-transform: lowercase;
+}
+.terms h2 {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  margin-bottom: 2.5rem;
+  opacity: 0.7;
+  text-transform: lowercase;
+}
+.terms h3 {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 .terms p {
   font-size: 1rem;
   line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+.terms ul {
+  font-size: 1rem;
+  line-height: 1.7;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.terms a {
+  text-decoration: underline;
 }
 .scamForm__submit {
   min-height: clamp(3.9rem, 6vw, 4.8rem);
