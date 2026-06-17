@@ -77,7 +77,7 @@ export default function UploadSection() {
     setMessage("");
 
     try {
-      const res = await fetch(`${process.env.__NEXT_ROUTER_BASEPATH ?? ""}/api/submit`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/submit`, {
         method: "POST",
         body: new FormData(formEl),
       });
