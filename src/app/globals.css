@@ -4,6 +4,11 @@
     url("/realfaketickets/fonts/AnoBlack-WideItalic.woff") format("woff");
   font-display: swap;
 }
+@font-face {
+  font-family: "Ano Bold Regular";
+  src: url("/realfaketickets/fonts/AnoBold-Regular.otf") format("opentype");
+  font-display: swap;
+}
 
 /* ===== Reset ===== */
 *,
@@ -265,6 +270,7 @@ a {
   margin-bottom: 1rem;
 }
 .faq__a {
+  font-family: "Ano Bold Regular", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(0.75rem, 1.4vw, 1.1rem);
   line-height: 1.5;
 }
