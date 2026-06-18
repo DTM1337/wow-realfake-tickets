@@ -548,11 +548,13 @@ a {
   margin-bottom: 0.5rem;
 }
 .terms p {
+  font-family: "Ano Bold Regular", "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.7;
   margin-bottom: 0.5rem;
 }
 .terms ul {
+  font-family: "Ano Bold Regular", "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.7;
   padding-left: 1.5rem;
