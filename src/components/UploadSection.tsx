@@ -157,7 +157,22 @@ export default function UploadSection() {
 
             <label className="scamForm__field">
               <span>Age</span>
-              <input name="age" type="number" min="18" max="120" required />
+              <input
+                name="age"
+                type="number"
+                min="18"
+                max="120"
+                required
+                onInvalid={(e) => {
+                  const input = e.currentTarget;
+                  input.setCustomValidity(
+                    input.validity.rangeUnderflow
+                      ? "Du måste vara minst 18 år för att delta."
+                      : ""
+                  );
+                }}
+                onInput={(e) => e.currentTarget.setCustomValidity("")}
+              />
             </label>
 
             <label className="scamForm__field">
