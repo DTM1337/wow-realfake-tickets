@@ -31,7 +31,8 @@ const faqs = [
   },
   {
     q: "Do fake tickets normally appear at Way Out West?",
-    a: "As with all major events, counterfeit tickets occasionally surface for Way Out West as well. The festival takes this issue seriously and works actively to combat ticket fraud, including extensive communication ahead of each event to remind visitors that only tickets purchased through the festival's official ticketing partner can be guaranteed as valid. Buying tickets on the secondary market always comes with a degree of risk.",
+    a: "As with all major events, counterfeit tickets occasionally surface for Way Out West as well. The festival takes this issue seriously and works actively to combat ticket fraud, including extensive communication ahead of each event to remind visitors that only tickets purchased through the festival's official ticketing partner can be guaranteed as valid. Buying tickets on the secondary market always comes with a degree of risk.\n\nOf course, the best thing is to not get scammed in the first place. HERE are some tips on how to protect yourself from ticket scams.",
+    link: "https://discover.ticketmaster.co.uk/hq/how-to-protect-yourself-against-ticketing-scams-61211/",
   },
 ];
 
@@ -50,6 +51,13 @@ export default function FAQ() {
             <div className="faq__a">
               {item.a.split("\n").map((line, j) =>
                 line === "" ? <br key={j} /> : <p key={j}>{line}</p>
+              )}
+              {item.link && (
+                <p>
+                  <a href={item.link} target="_blank" rel="noreferrer">
+                    {item.link}
+                  </a>
+                </p>
               )}
             </div>
           </div>
