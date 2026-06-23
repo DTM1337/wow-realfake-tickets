@@ -70,7 +70,8 @@ export default function TermsPage() {
       <p>The jury's decisions are final and binding and may not be appealed.</p>
 
       <h3>14. WINNERS</h3>
-      <p>Fifteen (15) winners will be selected from all eligible entries received during the Promotion Period.</p>
+      <p>Fifteen (10) winners will be selected from all eligible entries received during the Promotion Period.</p>
+      <p>If your story earns you a Real Fake Ticket, documenting your Way Out West experience through video and/or photos that we can share across our channels is a required part of participating. We'd love for you to capture and share your experience in your own way, and share your unique perspective of the festival.</p>
 
       <h3>15. PRIZE</h3>
       <p>Each winner will receive: Two (2) Way Out West 3-Day Festival Passes.</p>
