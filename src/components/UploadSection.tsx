@@ -157,7 +157,7 @@ export default function UploadSection() {
 
             <label className="scamForm__field">
               <span>Age</span>
-              <input name="age" type="number" min="1" max="120" required />
+              <input name="age" type="number" min="18" max="120" required />
             </label>
 
             <label className="scamForm__field">

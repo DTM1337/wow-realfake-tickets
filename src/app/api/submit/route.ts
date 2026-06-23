@@ -41,6 +41,13 @@ export async function POST(req: Request) {
     );
   }
 
+  if (age < 18) {
+    return NextResponse.json(
+      { error: "Du måste vara minst 18 år för att delta." },
+      { status: 400 }
+    );
+  }
+
   const attachmentPaths: string[] = [];
   for (const file of attachments) {
     if (!file.type.startsWith("image/")) {
