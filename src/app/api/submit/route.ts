@@ -57,7 +57,7 @@ export async function POST(req: Request) {
 
   if (existing) {
     return NextResponse.json(
-      { error: "Den här mailadressen har redan skickat in ett bidrag." },
+      { error: "This email address has already submitted an entry." },
       { status: 409 }
     );
   }
@@ -112,7 +112,7 @@ export async function POST(req: Request) {
   if (insErr) {
     if (insErr.code === "23505") {
       return NextResponse.json(
-        { error: "Den här mailadressen har redan skickat in ett bidrag." },
+        { error: "This email address has already submitted an entry." },
         { status: 409 }
       );
     }
