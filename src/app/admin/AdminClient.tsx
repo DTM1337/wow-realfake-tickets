@@ -44,10 +44,20 @@ export default function AdminClient({ items: initial, analyticsUrl }: { items: I
     URL.revokeObjectURL(url);
   }
 
+  const [deleting, setDeleting] = useState<string | null>(null);
+
   async function handleDelete(id: string) {
-    await deleteSubmission(id);
-    setItems((prev) => prev.filter((i) => i.id !== id));
-    setConfirmDelete(null);
+    setDeleting(id);
+    try {
+      await deleteSubmission(id);
+      setItems((prev) => prev.filter((i) => i.id !== id));
+      setConfirmDelete(null);
+    } catch (err) {
+      console.error("Kunde inte radera:", err);
+      alert("Kunde inte radera bidraget. Försök igen.");
+    } finally {
+      setDeleting(null);
+    }
   }
 
   return (
@@ -109,11 +119,18 @@ export default function AdminClient({ items: initial, analyticsUrl }: { items: I
                   {confirmDelete === item.id ? (
                     <div className="admin__confirm">
                       <span>are you sure?</span>
-                      <button className="admin__btnDanger" onClick={() => handleDelete(item.id)}>yes, delete</button>
-                      <button onClick={() => setConfirmDelete(null)}>cancel</button>
+                      <button
+                        type="button"
+                        className="admin__btnDanger"
+                        disabled={deleting === item.id}
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        {deleting === item.id ? "deleting…" : "yes, delete"}
+                      </button>
+                      <button type="button" onClick={() => setConfirmDelete(null)}>cancel</button>
                     </div>
                   ) : (
-                    <button className="admin__btnDelete" onClick={() => setConfirmDelete(item.id)}>delete</button>
+                    <button type="button" className="admin__btnDelete" onClick={() => setConfirmDelete(item.id)}>delete</button>
                   )}
                 </div>
               </article>
