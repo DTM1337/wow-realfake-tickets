@@ -12,11 +12,15 @@ async function assertAdmin() {
   }
 }
 
-export async function deleteSubmission(id: string) {
-  await assertAdmin();
+export async function deleteSubmission(id: string): Promise<{ error?: string }> {
+  try {
+    await assertAdmin();
+  } catch {
+    return { error: "Din session har gått ut. Logga ut och in igen." };
+  }
 
   const supabase = createServiceClient();
-  if (!supabase) return;
+  if (!supabase) return { error: "Supabase är inte konfigurerat." };
 
   const { data } = await supabase
     .from("scam_applications")
@@ -31,10 +35,18 @@ export async function deleteSubmission(id: string) {
         ? [data.ticket_image_path]
         : [];
     if (paths.length > 0) {
-      await supabase.storage.from("scam-proof").remove(paths);
+      const { error: removeErr } = await supabase.storage.from("scam-proof").remove(paths);
+      if (removeErr) {
+        return { error: `Kunde inte ta bort bilagor: ${removeErr.message}` };
+      }
     }
   }
 
-  await supabase.from("scam_applications").delete().eq("id", id);
+  const { error: delErr } = await supabase.from("scam_applications").delete().eq("id", id);
+  if (delErr) {
+    return { error: `Kunde inte ta bort raden: ${delErr.message}` };
+  }
+
   revalidatePath("/admin");
+  return {};
 }

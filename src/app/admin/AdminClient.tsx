@@ -49,12 +49,16 @@ export default function AdminClient({ items: initial, analyticsUrl }: { items: I
   async function handleDelete(id: string) {
     setDeleting(id);
     try {
-      await deleteSubmission(id);
+      const result = await deleteSubmission(id);
+      if (result.error) {
+        alert(result.error);
+        return;
+      }
       setItems((prev) => prev.filter((i) => i.id !== id));
       setConfirmDelete(null);
     } catch (err) {
       console.error("Kunde inte radera:", err);
-      alert("Kunde inte radera bidraget. Försök igen.");
+      alert("Kunde inte radera bidraget: " + (err instanceof Error ? err.message : String(err)));
     } finally {
       setDeleting(null);
     }
