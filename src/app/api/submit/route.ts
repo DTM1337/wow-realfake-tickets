@@ -49,6 +49,19 @@ export async function POST(req: Request) {
     );
   }
 
+  const { data: existing } = await supabase
+    .from("scam_applications")
+    .select("id")
+    .ilike("email", email)
+    .maybeSingle();
+
+  if (existing) {
+    return NextResponse.json(
+      { error: "Den här mailadressen har redan skickat in ett bidrag." },
+      { status: 409 }
+    );
+  }
+
   const attachmentPaths: string[] = [];
   for (const file of attachments) {
     if (!file.type.startsWith("image/")) {
@@ -97,6 +110,12 @@ export async function POST(req: Request) {
     });
 
   if (insErr) {
+    if (insErr.code === "23505") {
+      return NextResponse.json(
+        { error: "Den här mailadressen har redan skickat in ett bidrag." },
+        { status: 409 }
+      );
+    }
     return NextResponse.json({ error: insErr.message }, { status: 500 });
   }
 

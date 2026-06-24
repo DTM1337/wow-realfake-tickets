@@ -25,6 +25,10 @@ alter table public.scam_applications add column if not exists country text;
 alter table public.scam_applications add column if not exists attachment_paths text[] not null default '{}';
 alter table public.scam_applications add column if not exists age integer;
 
+-- 1c. En mailadress får bara skicka in ett bidrag.
+create unique index if not exists scam_applications_email_unique_idx
+  on public.scam_applications (lower(email));
+
 -- 2. RLS pa — men inga policies.
 -- Ingen anon-atkomst alls. API-routen (/api/submit) och adminvyn anvander
 -- service_role-nyckeln, som kringgar RLS. Det ar avsiktligt: allmanheten ska
