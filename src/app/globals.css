@@ -124,7 +124,7 @@ a {
 @media (max-width: 767px) {
   .sectionTitle {
     position: absolute;
-    top: 42%;
+    top: 37%;
     left: 49%;
     z-index: 1;
     display: block;
