@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { createServiceClient } from "@/lib/supabase";
+import { addToRuleList } from "@/lib/rule";
 
 export const runtime = "nodejs";
 
@@ -98,6 +99,8 @@ export async function POST(req: Request) {
   if (insErr) {
     return NextResponse.json({ error: insErr.message }, { status: 500 });
   }
+
+  await addToRuleList(email, name);
 
   return NextResponse.json({ ok: true });
 }
