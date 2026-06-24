@@ -20,7 +20,7 @@ async function login(formData: FormData) {
     (await cookies()).set(COOKIE, makeSessionToken(pw), {
       httpOnly: true,
       sameSite: "lax",
-      path: "/admin",
+      path: "/realfaketickets/admin",
     });
   }
   revalidatePath("/admin");
@@ -28,7 +28,7 @@ async function login(formData: FormData) {
 
 async function logout() {
   "use server";
-  (await cookies()).delete(COOKIE);
+  (await cookies()).delete({ name: COOKIE, path: "/realfaketickets/admin" });
   revalidatePath("/admin");
 }
 
