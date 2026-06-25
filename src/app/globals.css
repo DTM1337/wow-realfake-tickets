@@ -273,6 +273,7 @@ a {
   font-family: "Ano Bold Regular", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(0.75rem, 1.4vw, 1.1rem);
   line-height: 1.5;
+  max-width: 65ch;
 }
 
 /* ===== Upload-sektion: hotspot ===== */
