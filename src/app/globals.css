@@ -226,6 +226,21 @@ a {
   border: 0;
 }
 
+/* Campaign-end overlay */
+.hero__end {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.hero__end--mobile { display: none; }
+@media (max-width: 767px) {
+  .hero__end--desktop { display: none; }
+  .hero__end--mobile { display: block; }
+}
+
 /* ===== FAQ ===== */
 .faq {
   background: #0a0a0a;
