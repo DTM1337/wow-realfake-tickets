@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 
+const CAMPAIGN_END = new Date("2026-07-09T00:00:00+02:00");
+
 type Status = "idle" | "submitting" | "success" | "error";
 type AttachmentPreview = {
   id: string;
@@ -99,20 +101,30 @@ export default function UploadSection() {
     }
   }
 
+  const campaignEnded = new Date() >= CAMPAIGN_END;
+
   return (
     <section id="upload" className="upload">
       <picture>
-        <source media="(max-width: 767px)" srcSet={asset("/images/upload-mobile.png")} />
-        <img src={asset("/images/upload-desktop.png")} alt="Upload your scam proof" />
+        <source
+          media="(max-width: 767px)"
+          srcSet={asset(campaignEnded ? "/images/upload-mobile-end.png" : "/images/upload-mobile.png")}
+        />
+        <img
+          src={asset(campaignEnded ? "/images/upload-desktop-end.png" : "/images/upload-desktop.png")}
+          alt="Upload your scam proof"
+        />
       </picture>
 
       {/* Osynlig klickyta ovanpå upload-ikonen i bilden */}
-      <button
-        type="button"
-        className="upload__trigger"
-        onClick={openModal}
-        aria-label="Öppna formuläret — ladda upp din scam proof"
-      />
+      {!campaignEnded && (
+        <button
+          type="button"
+          className="upload__trigger"
+          onClick={openModal}
+          aria-label="Öppna formuläret — ladda upp din scam proof"
+        />
+      )}
 
       <dialog
         ref={dialogRef}
