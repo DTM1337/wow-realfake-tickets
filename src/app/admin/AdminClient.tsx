@@ -9,6 +9,7 @@ type Item = {
   city: string;
   country: string;
   email: string;
+  age?: number | null;
   artist: string;
   story: string;
   created_at: string;
@@ -118,6 +119,7 @@ export default function AdminClient({ items: initial, analyticsUrl }: { items: I
                   <p><strong>City:</strong> {item.city || "—"}</p>
                   <p><strong>Country:</strong> {item.country || "—"}</p>
                   <p><strong>Email:</strong> {item.email || "—"}</p>
+                  <p><strong>Age:</strong> {item.age ?? "—"}</p>
                   <p><strong>Artist:</strong> {item.artist || "—"}</p>
                   <p className="admin__story">{item.story}</p>
                   {confirmDelete === item.id ? (
