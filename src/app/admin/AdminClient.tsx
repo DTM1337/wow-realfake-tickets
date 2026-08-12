@@ -28,27 +28,10 @@ export default function AdminClient({ items: initial, analyticsUrl }: { items: I
   async function exportHTML() {
     setExportingHTML(true);
     try {
-      // Fetch all images as base64
-      const itemsWithBase64 = await Promise.all(
-        items.map(async (item) => {
-          const base64Urls = await Promise.all(
-            item.imageUrls.map(async (url) => {
-              try {
-                const res = await fetch(url);
-                const blob = await res.blob();
-                return await new Promise<string>((resolve) => {
-                  const reader = new FileReader();
-                  reader.onload = () => resolve(reader.result as string);
-                  reader.readAsDataURL(blob);
-                });
-              } catch {
-                return url;
-              }
-            })
-          );
-          return { ...item, base64Urls };
-        })
-      );
+      const itemsWithBase64 = items.map((item) => ({
+        ...item,
+        base64Urls: item.imageUrls,
+      }));
 
       const css = `
         body { margin: 0; background: #0a0a0a; color: #ffb4dd; font-family: "Helvetica Neue", Arial, sans-serif; padding: 2rem; }
