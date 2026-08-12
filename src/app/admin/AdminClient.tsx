@@ -172,8 +172,12 @@ export default function AdminClient({ items: initial, analyticsUrl }: { items: I
       const a = document.createElement("a");
       a.href = url;
       a.download = `scam-proofs-${new Date().toISOString().slice(0, 10)}.html`;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
+    } catch (err) {
+      alert("Export misslyckades: " + (err instanceof Error ? err.message : String(err)));
     } finally {
       setExportingHTML(false);
     }
