@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import JSZip from "jszip";
 import { createServiceClient } from "@/lib/supabase";
 import { isValidToken, COOKIE } from "@/lib/auth";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
 
 function esc(s: unknown) {
   return String(s ?? "")
@@ -35,9 +33,7 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  const zip = new JSZip();
-  const imgFolder = zip.folder("images")!;
-
+  // Generate fresh signed URLs (valid 6h) — no image downloading needed
   const cards = await Promise.all(
     (rows ?? []).map(async (row) => {
       const paths: string[] = Array.isArray(row.attachment_paths)
@@ -46,26 +42,18 @@ export async function GET() {
           ? [row.ticket_image_path]
           : [];
 
-      const localFilenames = (
+      const signedUrls = (
         await Promise.all(
-          paths.map(async (storagePath, i) => {
-            const ext = storagePath.split(".").pop() ?? "jpg";
-            const filename = `${row.id}-${i + 1}.${ext}`;
-            try {
-              const { data } = await supabase.storage.from("scam-proof").download(storagePath);
-              if (data) {
-                imgFolder.file(filename, await data.arrayBuffer());
-                return filename;
-              }
-            } catch { /* skip */ }
-            return null;
+          paths.map(async (p) => {
+            const { data } = await supabase.storage.from("scam-proof").createSignedUrl(p, 21600);
+            return data?.signedUrl ?? null;
           })
         )
       ).filter(Boolean) as string[];
 
       const imagesHtml =
-        localFilenames.length > 0
-          ? `<div class="images" onclick="openLightbox(${JSON.stringify(localFilenames.map((f) => `images/${f}`))},0)">${localFilenames.map((f) => `<img src="images/${f}" alt="" />`).join("")}</div>`
+        signedUrls.length > 0
+          ? `<div class="images" onclick="openLightbox(${JSON.stringify(signedUrls)},0)">${signedUrls.map((u) => `<img src="${esc(u)}" alt="" />`).join("")}</div>`
           : `<div class="noimg">no attachments</div>`;
 
       return `<article class="card" data-search="${esc([row.name, row.city, row.country, row.email, row.artist, row.story].join(" ").toLowerCase())}">
@@ -157,15 +145,12 @@ function filterCards(q){var cards=document.querySelectorAll('.card'),count=0;car
 </body>
 </html>`;
 
-  zip.file("index.html", html);
-
-  const zipBuffer = await zip.generateAsync({ type: "nodebuffer", compression: "DEFLATE" });
   const date = new Date().toISOString().slice(0, 10);
 
-  return new NextResponse(zipBuffer.buffer as ArrayBuffer, {
+  return new NextResponse(html, {
     headers: {
-      "Content-Type": "application/zip",
-      "Content-Disposition": `attachment; filename="scam-proofs-${date}.zip"`,
+      "Content-Type": "text/html; charset=utf-8",
+      "Content-Disposition": `attachment; filename="scam-proofs-${date}.html"`,
     },
   });
 }
