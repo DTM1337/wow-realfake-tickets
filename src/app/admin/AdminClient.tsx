@@ -66,8 +66,9 @@ export default function AdminClient({ items: initial, analyticsUrl }: { items: I
             })
           ).then((r) => r.filter(Boolean) as string[]);
 
+          const imgPaths = localFiles.map((f) => `images/${f}`);
           const imagesHtml = localFiles.length > 0
-            ? `<div class="images" onclick="openLightbox(${JSON.stringify(localFiles.map((f) => `images/${f}`))},0)">${localFiles.map((f) => `<img src="images/${f}" alt=""/>`).join("")}</div>`
+            ? `<div class="images" data-imgs="${esc(JSON.stringify(imgPaths))}" onclick="openLightbox(JSON.parse(this.dataset.imgs),0)">${localFiles.map((f) => `<img src="images/${f}" alt=""/>`).join("")}</div>`
             : `<div class="noimg">no attachments</div>`;
 
           return `<article class="card" data-search="${esc([row.name, row.city, row.country, row.email, row.artist, row.story].join(" ").toLowerCase())}">
